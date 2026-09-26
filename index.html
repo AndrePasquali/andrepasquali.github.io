@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeartAttack Games | Estúdio Indie de Jogos Mobile</title>
+  <meta name="description" content="HeartAttack Games - Estúdio independente focado em jogos arcade eletrizantes, desafios de reflexo e experiências mobile memoráveis. Conheça Simon Genius e mais.">
+  <meta name="theme-color" content="#0a0c14">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #08090f;
+      --bg-card: rgba(20, 24, 38, 0.7);
+      --bg-card-border: rgba(255, 255, 255, 0.08);
+      --primary-red: #ff2a55;
+      --primary-red-glow: rgba(255, 42, 85, 0.4);
+      --accent-cyan: #00f0ff;
+      --accent-green: #00ff88;
+      --accent-yellow: #ffcc00;
+      --accent-blue: #3d84ff;
+      --text-main: #f0f4fc;
+      --text-muted: #8b95a8;
+      --font-body: 'Outfit', sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Glow Backgrounds */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .glow-blob-1 {
+      position: absolute;
+      top: -15%;
+      left: 20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 42, 85, 0.15) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .glow-blob-2 {
+      position: absolute;
+      top: 40%;
+      right: -10%;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      filter: blur(100px);
+    }
+
+    /* Header / Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 9, 15, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--bg-card-border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.5px;
+    }
+
+    .heartbeat-icon {
+      width: 32px;
+      height: 32px;
+      fill: none;
+      stroke: var(--primary-red);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 8px var(--primary-red-glow));
+      animation: pulseAnim 2.2s infinite ease-in-out;
+    }
+
+    @keyframes pulseAnim {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      15% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 14px var(--primary-red)); }
+      30% { transform: scale(0.98); }
+      45% { transform: scale(1.1); }
+    }
+
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, #ff4d6d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-cta {
+      background: rgba(255, 42, 85, 0.12);
+      border: 1px solid rgba(255, 42, 85, 0.35);
+      color: var(--primary-red) !important;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-red) !important;
+      color: #fff !important;
+      box-shadow: 0 0 20px var(--primary-red-glow);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bg-card-border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, #ff2a55 70%, #ff8099 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+
+    /* Game Spotlight Card */
+    .spotlight-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 2rem auto 5rem;
+      padding: 0 1.5rem;
+    }
+
+    .spotlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 24px;
+      padding: 3rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-red), var(--accent-cyan), transparent);
+    }
+
+    .game-badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: rgba(0, 255, 136, 0.12);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      color: var(--accent-green);
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .game-title {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .game-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .game-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: #d8e2f0;
+    }
+
+    .feature-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 42, 85, 0.15);
+      color: var(--primary-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .playstore-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: #ffffff;
+      color: #0d1017;
+      text-decoration: none;
+      padding: 0.85rem 1.6rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .playstore-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.35);
+      background: #f8fafc;
+    }
+
+    .playstore-button svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .btn-subtext {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      color: #555e6d;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    /* Interactive Simon Disc Simulation */
+    .game-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .simon-disc {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: #121522;
+      border: 6px solid #202638;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      padding: 10px;
+      position: relative;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.8);
+      user-select: none;
+    }
+
+    .simon-pad {
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease-out;
+      opacity: 0.65;
+    }
+
+    .pad-green {
+      background: var(--accent-green);
+      border-top-left-radius: 100%;
+    }
+    .pad-red {
+      background: var(--primary-red);
+      border-top-right-radius: 100%;
+    }
+    .pad-yellow {
+      background: var(--accent-yellow);
+      border-bottom-left-radius: 100%;
+    }
+    .pad-blue {
+      background: var(--accent-blue);
+      border-bottom-right-radius: 100%;
+    }
+
+    .simon-pad:hover, .simon-pad.active {
+      opacity: 1;
+      transform: scale(0.98);
+    }
+
+    .pad-green:hover, .pad-green.active { box-shadow: 0 0 35px var(--accent-green); }
+    .pad-red:hover, .pad-red.active { box-shadow: 0 0 35px var(--primary-red); }
+    .pad-yellow:hover, .pad-yellow.active { box-shadow: 0 0 35px var(--accent-yellow); }
+    .pad-blue:hover, .pad-blue.active { box-shadow: 0 0 35px var(--accent-blue); }
+
+    .simon-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95px;
+      height: 95px;
+      background: #181d2e;
+      border: 4px solid #283148;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .center-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .disc-hint {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Studio Values */
+    .values-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 3rem auto 6rem;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      font-weight: 700;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .value-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 18px;
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 42, 85, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .value-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .value-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .value-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Privacy Policy Accordion / Compliance */
+    .privacy-section {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto 6rem;
+      padding: 0 2rem;
+    }
+
+    .privacy-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+    }
+
+    .privacy-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .privacy-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      background: #05060a;
+      border-top: 1px solid var(--bg-card-border);
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid var(--bg-card-border);
+      color: #9cb3d6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #555e6d;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .spotlight-card {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .game-features {
+        text-align: left;
+      }
+      .playstore-button {
+        margin: 0 auto;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Effects -->
+  <div class="ambient-glow">
+    <div class="glow-blob-1"></div>
+    <div class="glow-blob-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <svg class="heartbeat-icon" viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          <path d="M3.5 12h3l2-3 3 7 2-5 2 2h3" stroke-width="1.8" stroke="#ffffff"></path>
+        </svg>
+        <span>HeartAttack Games</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#games">Jogos</a></li>
+        <li><a href="#about">Sobre o Estúdio</a></li>
+        <li><a href="#privacy">Privacidade</a></li>
+        <li><a href="app-ads.txt" class="footer-badge" target="_blank">app-ads.txt</a></li>
+        <li><a href="#games" class="nav-cta">Jogar Agora</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-tagline">Mobile Indie Game Studio</div>
+    <h1>Experiências Arcade de <span class="gradient-text">Tirar o Fôlego</span></h1>
+    <p class="hero-desc">
+      Desenvolvemos jogos mobile eletrizantes com foco em reflexos rápidos, mecânicas clássicas reinventadas e pura diversão arcade.
+    </p>
+  </section>
+
+  <!-- Featured Game Spotlight -->
+  <section id="games" class="spotlight-section">
+    <div class="spotlight-card">
+      <div class="game-info">
+        <span class="game-badge">Destaque Oficial</span>
+        <h2 class="game-title">Simon Genius - Jogo da Memória</h2>
+        <p class="game-subtitle">
+          O clássico jogo de memória e ritmo agora com visual moderno, jogabilidade instantânea e ranking de recordes. Desafie seus reflexos e supere sua pontuação máxima!
+        </p>
+
+        <div class="game-features">
+          <div class="feature-item">
+            <span class="feature-icon">✓</span> Desafio progressivo de memória
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span> Efeitos sonoros e visuais imersivos
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span> Conquistas do Google Play Games
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span> Totalmente Gratuito para Jogar
+          </div>
+        </div>
+
+        <a href="https://play.google.com/store/apps/details?id=com.heartattackgames.simongeniusmemorygame" target="_blank" rel="noopener noreferrer" class="playstore-button">
+          <!-- Google Play Icon SVG -->
+          <svg viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M3.61 2.37A1.56 1.56 0 0 0 3 3.65v16.7c0 .52.23.98.61 1.28l.07.06 9.38-9.38v-.22L3.68 2.31l-.07.06z"/>
+            <path fill="#FBBC04" d="M16.14 15.09l-3.08-3.08v-.22l3.08-3.08.07.04 3.65 2.07c1.04.59 1.04 1.56 0 2.15l-3.65 2.08-.07.04z"/>
+            <path fill="#EA4335" d="M13.06 11.79L3.61 21.24c.34.37.88.42 1.49.07l11.11-6.31-3.15-3.21z"/>
+            <path fill="#34A853" d="M13.06 12.21l3.15-3.21-11.11-6.31c-.61-.35-1.15-.3-1.49.07l9.45 9.45z"/>
+          </svg>
+          <div>
+            <span class="btn-subtext">Disponível no</span>
+            <strong>Google Play</strong>
+          </div>
+        </a>
+      </div>
+
+      <!-- Interactive Simon Disc -->
+      <div class="game-visual">
+        <div class="simon-disc" id="simonDisc" title="Clique nas cores para testar!">
+          <div class="simon-pad pad-green" data-tone="329.63"></div>
+          <div class="simon-pad pad-red" data-tone="261.63"></div>
+          <div class="simon-pad pad-yellow" data-tone="392.00"></div>
+          <div class="simon-pad pad-blue" data-tone="523.25"></div>
+          <div class="simon-center">
+            <span class="center-label">SIMON<br>GENIUS</span>
+          </div>
+        </div>
+        <div class="disc-hint">
+          <span>👆 Toque nas cores para interagir!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Studio Values / About -->
+  <section id="about" class="values-section">
+    <h2 class="section-title">Nossos Pilares</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <h3 class="value-title">Jogabilidade Pura</h3>
+        <p class="value-text">Jogos diretos ao ponto, sem telas intermináveis. Abra e jogue instantaneamente onde estiver.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🧠</div>
+        <h3 class="value-title">Desafio Mental</h3>
+        <p class="value-text">Mecânicas focadas em reflexo, raciocínio rápido e treino de memória estimulante para todas as idades.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🛡️</div>
+        <h3 class="value-title">Segurança & Privacidade</h3>
+        <p class="value-text">Priorizamos uma experiência limpa e segura com conformidade total às diretrizes da Google Play.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Policy Section -->
+  <section id="privacy" class="privacy-section">
+    <div class="privacy-card">
+      <h2>Política de Privacidade</h2>
+      <p>
+        A <strong>HeartAttack Games</strong> valoriza e respeita a privacidade de todos os seus usuários. Nossos jogos são desenvolvidos para oferecer entretenimento seguro e limpo.
+      </p>
+      <p>
+        <strong>Coleta de Dados:</strong> O jogo <em>Simon Genius - Jogo da Memória</em> não coleta dados pessoais sensíveis (como nome, endereço ou documentos). Utilizamos serviços confiáveis como o <em>Google Play Games</em> para salvar recordes e conquistas, e o <em>Google AdMob</em> para exibição responsável de anúncios.
+      </p>
+      <p>
+        <strong>Conformidade e Transparência:</strong> Respeitamos todas as diretrizes de proteção de dados (LGPD / GDPR). Todas as redes de anúncios integradas são auditadas e operam com autorização expressa documentada em nosso <a href="app-ads.txt" style="color: var(--accent-cyan); text-decoration: underline;">app-ads.txt</a>.
+      </p>
+      <p>
+        Para dúvidas sobre privacidade ou suporte, entre em contato conosco através de nossos canais oficiais.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <a href="#" class="brand-logo">
+          <svg class="heartbeat-icon" viewBox="0 0 24 24" style="width: 26px; height: 26px;">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span>HeartAttack Games</span>
+        </a>
+
+        <div class="footer-links">
+          <a href="#games">Jogos</a>
+          <a href="#about">Sobre</a>
+          <a href="#privacy">Política de Privacidade</a>
+          <a href="app-ads.txt" class="footer-badge">📄 app-ads.txt</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 HeartAttack Games. Todos os direitos reservados.</div>
+        <div>Desenvolvimento Independente de Jogos Mobile.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Web Audio Synth for Interactive Simon Pads -->
+  <script>
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function playTone(freq) {
+      try {
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+      } catch (e) {
+        // AudioContext disabled or not allowed
+      }
+    }
+
+    const pads = document.querySelectorAll('.simon-pad');
+    pads.forEach(pad => {
+      const freq = parseFloat(pad.dataset.tone);
+      
+      const activate = () => {
+        pad.classList.add('active');
+        playTone(freq);
+        setTimeout(() => pad.classList.remove('active'), 250);
+      };
+
+      pad.addEventListener('click', activate);
+      pad.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        activate();
+      }, { passive: false });
+    });
+  </script>
+</body>
+</html>
