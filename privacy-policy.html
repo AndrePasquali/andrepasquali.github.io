@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade | Simon Genius - HeartAttack Games</title>
+  <meta name="description" content="Política de Privacidade oficial do jogo Simon Genius - Jogo da Memória, desenvolvido pela HeartAttack Games. Saiba como seus dados são protegidos.">
+  <meta name="theme-color" content="#07080e">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #07080e;
+      --bg-card: rgba(18, 22, 34, 0.85);
+      --bg-card-border: rgba(255, 255, 255, 0.08);
+      --primary-red: #ff2a55;
+      --accent-cyan: #00f0ff;
+      --accent-green: #00ff88;
+      --text-main: #f0f4fc;
+      --text-muted: #94a1b8;
+      --font-body: 'Outfit', sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient background */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .glow-blob {
+      position: absolute;
+      top: -10%;
+      left: 25%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 42, 85, 0.12) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 8, 14, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--bg-card-border);
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .heartbeat-icon {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: var(--primary-red);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-back {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-back:hover {
+      opacity: 0.8;
+    }
+
+    /* Policy Content */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 3.5rem auto 5rem;
+      padding: 0 1.5rem;
+      flex-grow: 1;
+    }
+
+    .policy-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-red);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.5px;
+    }
+
+    .last-updated {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--bg-card-border);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 2.2rem 0 0.9rem;
+      letter-spacing: -0.3px;
+    }
+
+    p {
+      color: #cad5e8;
+      margin-bottom: 1.1rem;
+      font-size: 1.02rem;
+    }
+
+    ul {
+      margin: 0.5rem 0 1.3rem 1.6rem;
+      color: #cad5e8;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: rgba(0, 240, 255, 0.05);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1.8rem 0;
+      color: #d7e4f7;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      background: #040508;
+      border-top: 1px solid var(--bg-card-border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #637085;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 650px) {
+      .policy-wrapper {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow">
+    <div class="glow-blob"></div>
+  </div>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg class="heartbeat-icon" viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          <path d="M3.5 12h3l2-3 3 7 2-5 2 2h3" stroke-width="1.8" stroke="#ffffff"></path>
+        </svg>
+        <span>HeartAttack Games</span>
+      </a>
+      <a href="index.html" class="nav-back">← Voltar ao Início</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="policy-wrapper">
+      <span class="badge">Documento Oficial</span>
+      <h1>Política de Privacidade</h1>
+      <div class="last-updated">Aplicativo: <strong>Simon Genius - Jogo da Memória</strong> (Android) &bull; Atualizado em: <strong>26 de setembro de 2026</strong></div>
+
+      <p>
+        Esta Política de Privacidade descreve as práticas de tratamento de dados da <strong>HeartAttack Games</strong> em relação ao aplicativo mobile <strong>Simon Genius - Jogo da Memória</strong> ("Aplicativo", "Jogo"). Nosso compromisso é proteger sua privacidade e fornecer total transparência sobre o uso de dados técnicos necessários para o funcionamento e suporte do jogo.
+      </p>
+
+      <div class="highlight-box">
+        <strong>Resumo Rápido:</strong> O <em>Simon Genius</em> <strong>NÃO</strong> coleta nem solicita dados de identificação pessoal direta, como nome, endereço residencial, e-mail pessoal, número de telefone ou documentos fiscais. Não vendemos dados de usuários.
+      </div>
+
+      <h2>1. Informações Coletadas e Finalidades</h2>
+      <p>
+        Para garantir o correto funcionamento do jogo, sincronização de recordes e suporte à gratuidade do aplicativo por meio de anúncios seguros, os seguintes tipos de informações técnicas podem ser processados:
+      </p>
+      <ul>
+        <li>
+          <strong>Identificadores de Dispositivo e Publicidade:</strong> Identificador de Publicidade do Google (AAID / Advertising ID) e identificadores anônimos de instalação, utilizados para entrega, controle de frequência e mensuração de anúncios pelo Google AdMob e suas redes de mediação.
+        </li>
+        <li>
+          <strong>Dados de Uso e Interação com o Jogo:</strong> Pontuações alcançadas, conquistas desbloqueadas, duração de sessões e eventos gerais de progresso, processados de forma anônima via Google Analytics for Firebase e Google Play Games para aprimoramento da jogabilidade.
+        </li>
+        <li>
+          <strong>Diagnósticos e Informações Técnicas de Desempenho:</strong> Modelo do dispositivo, versão do sistema operacional Android, logs de travamento (crashes) e métricas ANR para identificação e correção de falhas técnicas.
+        </li>
+      </ul>
+
+      <h2>2. Serviços de Terceiros Integrados</h2>
+      <p>
+        O jogo utiliza SDKs e serviços confiáveis fornecidos por parceiros de tecnologia líderes de mercado. Esses provedores possuem suas próprias políticas de privacidade e padrões de segurança:
+      </p>
+      <ul>
+        <li>
+          <strong>Google Play Games Services:</strong> Utilizado para gerenciamento do ranking de recordes mundiais e salvamento de conquistas na conta de jogador Google do usuário. Consulte a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>.
+        </li>
+        <li>
+          <strong>Google AdMob:</strong> Utilizado para veiculação de anúncios publicitários. O AdMob pode processar identificadores de dispositivo e dados de interação para exibir anúncios relevantes.
+        </li>
+        <li>
+          <strong>Google Analytics for Firebase:</strong> Utilizado para compreender a estabilidade e desempenho do aplicativo através de métricas agregadas e impessoais.
+        </li>
+        <li>
+          <strong>Redes de Mediação de Publicidade (Unity Ads / IronSource):</strong> Podem ser acionadas via mediação oficial do AdMob para fornecimento de inventário publicitário. Nossos registros de vendedores autorizados encontram-se publicados em nosso arquivo <a href="app-ads.txt" target="_blank">app-ads.txt</a>.
+        </li>
+      </ul>
+
+      <h2>3. Segurança dos Dados e Criptografia</h2>
+      <p>
+        Todas as transmissões de dados entre o aplicativo e os serviços em nuvem (Google Play Games, AdMob e Firebase) são realizadas através de conexões estritamente criptografadas utilizando protocolos seguros da indústria (<strong>HTTPS / TLS</strong>), impedindo a interceptação não autorizada.
+      </p>
+
+      <h2>4. Privacidade de Crianças (COPPA e LGPD)</h2>
+      <p>
+        O <strong>Simon Genius</strong> é um jogo casual de desafio de memória destinado ao público geral. O aplicativo não coleta intencionalmente informações de identificação pessoal de crianças. Quando veiculados anúncios para usuários classificados em faixas etárias protegidas, os sistemas operam em conformidade com o <em>Children's Online Privacy Protection Act (COPPA)</em> e com as diretrizes para famílias da Google Play Store, desativando a personalização comportamental de anúncios.
+      </p>
+
+      <h2>5. Retenção e Exclusão de Dados</h2>
+      <p>
+        Como o jogo não armazena contas proprietárias nem dados cadastrais em servidores próprios, a gestão dos dados obedece às ferramentas do próprio sistema Android:
+      </p>
+      <ul>
+        <li>
+          <strong>Exclusão/Redefinição do ID de Publicidade:</strong> Você pode a qualquer momento redefinir ou excluir seu Advertising ID acessando as <em>Configurações do Android &gt; Google &gt; Anúncios</em>.
+        </li>
+        <li>
+          <strong>Dados do Google Play Games:</strong> O usuário pode gerenciar ou excluir dados de perfil e histórico de jogos pelo aplicativo oficial <em>Google Play Games</em> em seu aparelho.
+        </li>
+        <li>
+          <strong>Exclusão Local:</strong> Desinstalar o jogo ou limpar os dados do aplicativo remove todas as preferências locais salvas no dispositivo.
+        </li>
+      </ul>
+
+      <h2>6. Alterações nesta Política</h2>
+      <p>
+        A <strong>HeartAttack Games</strong> pode atualizar esta Política de Privacidade periodicamente para refletir melhorias no jogo ou exigências legais e regulatórias. Recomendamos a consulta regular desta página para verificar eventuais atualizações.
+      </p>
+
+      <h2>7. Contato</h2>
+      <p>
+        Se você tiver qualquer dúvida sobre esta Política de Privacidade ou sobre as práticas de proteção de dados do estúdio, entre em contato com a equipe de desenvolvimento da <strong>HeartAttack Games</strong> através da nossa página oficial ou pelos canais de suporte cadastrados na Google Play Store.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div>&copy; 2026 HeartAttack Games. Todos os direitos reservados.</div>
+    <div style="margin-top: 0.35rem; font-size: 0.8rem;">Simon Genius - Jogo da Memória &bull; Política de Privacidade em Conformidade com a Google Play Store.</div>
+  </footer>
+
+</body>
+</html>
