@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Política de Privacidade | Simon Genius - HeartAttack Games</title>
-  <meta name="description" content="Política de Privacidade oficial do jogo Simon Genius - Jogo da Memória, desenvolvido pela HeartAttack Games. Saiba como seus dados são protegidos.">
+  <title>Privacy Policy / Política de Privacidade | Simon Genius - HeartAttack Games</title>
+  <meta name="description" content="Official Privacy Policy for Simon Genius - Memory Game by HeartAttack Games. Official store compliance (GDPR, LGPD, COPPA).">
   <meta name="theme-color" content="#07080e">
 
   <!-- Google Fonts -->
@@ -83,6 +83,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1rem;
     }
 
     .brand-logo {
@@ -106,14 +107,17 @@
       stroke-linejoin: round;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
     .nav-back {
       color: var(--accent-cyan);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
       transition: opacity 0.2s ease;
     }
 
@@ -141,14 +145,81 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
     }
 
+    /* Language Switcher Bar */
+    .lang-switcher-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--bg-card-border);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 1.25rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
     .badge {
-      display: inline-block;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: var(--primary-red);
+      color: var(--accent-cyan);
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .lang-toggle-box {
+      display: inline-flex;
+      background: rgba(10, 14, 24, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 4px;
+      border-radius: 12px;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a1b8;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .lang-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, #ff2a55, #e0113c);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 12px rgba(255, 42, 85, 0.5);
+      font-weight: 700;
     }
 
     h1 {
@@ -163,9 +234,7 @@
     .last-updated {
       color: var(--text-muted);
       font-size: 0.9rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--bg-card-border);
+      margin-bottom: 2rem;
     }
 
     h2 {
@@ -216,6 +285,19 @@
       color: #fff;
     }
 
+    /* Content Visibility by Language */
+    .content-en {
+      display: none;
+    }
+
+    body.lang-en .content-en {
+      display: block;
+    }
+
+    body.lang-en .content-pt {
+      display: none;
+    }
+
     /* Footer */
     footer {
       background: #040508;
@@ -232,10 +314,14 @@
       .policy-wrapper {
         padding: 2rem 1.5rem;
       }
+      .lang-switcher-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
-<body>
+<body class="lang-pt">
 
   <div class="ambient-glow">
     <div class="glow-blob"></div>
@@ -250,101 +336,245 @@
         </svg>
         <span>HeartAttack Games</span>
       </a>
-      <a href="index.html" class="nav-back">← Voltar ao Início</a>
+      <div class="nav-right">
+        <div class="lang-toggle-box" style="margin-right: 0.5rem;">
+          <button class="lang-btn btn-lang-pt active" onclick="setLanguage('pt')">
+            <span>🇧🇷</span> PT
+          </button>
+          <button class="lang-btn btn-lang-en" onclick="setLanguage('en')">
+            <span>🇺🇸</span> EN
+          </button>
+        </div>
+        <a href="index.html" class="nav-back content-pt">← Início</a>
+        <a href="index.html" class="nav-back content-en">← Home</a>
+      </div>
     </div>
   </header>
 
   <main>
     <div class="policy-wrapper">
-      <span class="badge">Documento Oficial</span>
-      <h1>Política de Privacidade</h1>
-      <div class="last-updated">Aplicativo: <strong>Simon Genius - Jogo da Memória</strong> (Android) &bull; Atualizado em: <strong>26 de setembro de 2026</strong></div>
-
-      <p>
-        Esta Política de Privacidade descreve as práticas de tratamento de dados da <strong>HeartAttack Games</strong> em relação ao aplicativo mobile <strong>Simon Genius - Jogo da Memória</strong> ("Aplicativo", "Jogo"). Nosso compromisso é proteger sua privacidade e fornecer total transparência sobre o uso de dados técnicos necessários para o funcionamento e suporte do jogo.
-      </p>
-
-      <div class="highlight-box">
-        <strong>Resumo Rápido:</strong> O <em>Simon Genius</em> <strong>NÃO</strong> coleta nem solicita dados de identificação pessoal direta, como nome, endereço residencial, e-mail pessoal, número de telefone ou documentos fiscais. Não vendemos dados de usuários.
+      
+      <!-- Language Switcher Bar -->
+      <div class="lang-switcher-container">
+        <div>
+          <span class="badge content-pt">Documento Oficial</span>
+          <span class="badge content-en">Official Policy</span>
+        </div>
+        <div class="lang-toggle-box">
+          <button class="lang-btn btn-lang-pt active" onclick="setLanguage('pt')">
+            <span>🇧🇷</span> Português
+          </button>
+          <button class="lang-btn btn-lang-en" onclick="setLanguage('en')">
+            <span>🇺🇸</span> English
+          </button>
+        </div>
       </div>
 
-      <h2>1. Informações Coletadas e Finalidades</h2>
-      <p>
-        Para garantir o correto funcionamento do jogo, sincronização de recordes e suporte à gratuidade do aplicativo por meio de anúncios seguros, os seguintes tipos de informações técnicas podem ser processados:
-      </p>
-      <ul>
-        <li>
-          <strong>Identificadores de Dispositivo e Publicidade:</strong> Identificador de Publicidade do Google (AAID / Advertising ID) e identificadores anônimos de instalação, utilizados para entrega, controle de frequência e mensuração de anúncios pelo Google AdMob e suas redes de mediação.
-        </li>
-        <li>
-          <strong>Dados de Uso e Interação com o Jogo:</strong> Pontuações alcançadas, conquistas desbloqueadas, duração de sessões e eventos gerais de progresso, processados de forma anônima via Google Analytics for Firebase e Google Play Games para aprimoramento da jogabilidade.
-        </li>
-        <li>
-          <strong>Diagnósticos e Informações Técnicas de Desempenho:</strong> Modelo do dispositivo, versão do sistema operacional Android, logs de travamento (crashes) e métricas ANR para identificação e correção de falhas técnicas.
-        </li>
-      </ul>
+      <!-- PORTUGUESE CONTENT (PT-BR) -->
+      <div class="content-pt">
+        <h1>Política de Privacidade</h1>
+        <div class="last-updated">Aplicativo: <strong>Simon Genius - Jogo da Memória</strong> (Android) &bull; Atualizado em: <strong>26 de setembro de 2026</strong></div>
 
-      <h2>2. Serviços de Terceiros Integrados</h2>
-      <p>
-        O jogo utiliza SDKs e serviços confiáveis fornecidos por parceiros de tecnologia líderes de mercado. Esses provedores possuem suas próprias políticas de privacidade e padrões de segurança:
-      </p>
-      <ul>
-        <li>
-          <strong>Google Play Games Services:</strong> Utilizado para gerenciamento do ranking de recordes mundiais e salvamento de conquistas na conta de jogador Google do usuário. Consulte a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>.
-        </li>
-        <li>
-          <strong>Google AdMob:</strong> Utilizado para veiculação de anúncios publicitários. O AdMob pode processar identificadores de dispositivo e dados de interação para exibir anúncios relevantes.
-        </li>
-        <li>
-          <strong>Google Analytics for Firebase:</strong> Utilizado para compreender a estabilidade e desempenho do aplicativo através de métricas agregadas e impessoais.
-        </li>
-        <li>
-          <strong>Redes de Mediação de Publicidade (Unity Ads / IronSource):</strong> Podem ser acionadas via mediação oficial do AdMob para fornecimento de inventário publicitário. Nossos registros de vendedores autorizados encontram-se publicados em nosso arquivo <a href="app-ads.txt" target="_blank">app-ads.txt</a>.
-        </li>
-      </ul>
+        <p>
+          Esta Política de Privacidade descreve as práticas de proteção e tratamento de dados da <strong>HeartAttack Games</strong> em relação ao aplicativo mobile <strong>Simon Genius - Jogo da Memória</strong> ("Aplicativo", "Jogo"). Nosso compromisso é respeitar e proteger sua privacidade com total transparência e conformidade com a LGPD e Google Play Store.
+        </p>
 
-      <h2>3. Segurança dos Dados e Criptografia</h2>
-      <p>
-        Todas as transmissões de dados entre o aplicativo e os serviços em nuvem (Google Play Games, AdMob e Firebase) são realizadas através de conexões estritamente criptografadas utilizando protocolos seguros da indústria (<strong>HTTPS / TLS</strong>), impedindo a interceptação não autorizada.
-      </p>
+        <div class="highlight-box">
+          <strong>Resumo de Privacidade:</strong> O <em>Simon Genius</em> <strong>NÃO</strong> coleta dados de identificação pessoal direta, como nome, CPF, endereço físico, e-mail pessoal ou telefone. O jogo não vende dados de usuários para terceiros.
+        </div>
 
-      <h2>4. Privacidade de Crianças (COPPA e LGPD)</h2>
-      <p>
-        O <strong>Simon Genius</strong> é um jogo casual de desafio de memória destinado ao público geral. O aplicativo não coleta intencionalmente informações de identificação pessoal de crianças. Quando veiculados anúncios para usuários classificados em faixas etárias protegidas, os sistemas operam em conformidade com o <em>Children's Online Privacy Protection Act (COPPA)</em> e com as diretrizes para famílias da Google Play Store, desativando a personalização comportamental de anúncios.
-      </p>
+        <h2>1. Informações Coletadas e Finalidades</h2>
+        <p>
+          Para viabilizar o funcionamento do jogo, sincronização de pontuações e exibição segura de publicidade, os seguintes dados técnicos são processados:
+        </p>
+        <ul>
+          <li>
+            <strong>Identificadores de Dispositivo e Publicidade:</strong> Identificador de Publicidade do Google (AAID / Advertising ID) e identificadores técnicos de instalação, usados para controle de frequência, prevenção de fraudes e exibição de anúncios pelo Google AdMob e suas redes de mediação.
+          </li>
+          <li>
+            <strong>Dados de Uso e Interação com o Jogo:</strong> Pontuações alcançadas, conquistas desbloqueadas, duração de sessões e eventos gerais de progresso, processados de forma anônima via Google Analytics for Firebase e Google Play Games para aprimoramento da jogabilidade.
+          </li>
+          <li>
+            <strong>Diagnósticos e Informações Técnicas de Desempenho:</strong> Modelo do dispositivo, versão do sistema operacional Android, logs de travamento (crashes) e métricas ANR para identificação e correção de falhas técnicas.
+          </li>
+        </ul>
 
-      <h2>5. Retenção e Exclusão de Dados</h2>
-      <p>
-        Como o jogo não armazena contas proprietárias nem dados cadastrais em servidores próprios, a gestão dos dados obedece às ferramentas do próprio sistema Android:
-      </p>
-      <ul>
-        <li>
-          <strong>Exclusão/Redefinição do ID de Publicidade:</strong> Você pode a qualquer momento redefinir ou excluir seu Advertising ID acessando as <em>Configurações do Android &gt; Google &gt; Anúncios</em>.
-        </li>
-        <li>
-          <strong>Dados do Google Play Games:</strong> O usuário pode gerenciar ou excluir dados de perfil e histórico de jogos pelo aplicativo oficial <em>Google Play Games</em> em seu aparelho.
-        </li>
-        <li>
-          <strong>Exclusão Local:</strong> Desinstalar o jogo ou limpar os dados do aplicativo remove todas as preferências locais salvas no dispositivo.
-        </li>
-      </ul>
+        <h2>2. Serviços de Terceiros Integrados</h2>
+        <p>
+          O aplicativo utiliza SDKs e serviços confiáveis fornecidos por parceiros de tecnologia líderes de mercado:
+        </p>
+        <ul>
+          <li>
+            <strong>Google Play Games Services:</strong> Utilizado para gerenciamento do ranking de recordes mundiais e salvamento de conquistas na conta de jogador Google do usuário. Consulte a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>.
+          </li>
+          <li>
+            <strong>Google AdMob:</strong> Utilizado para veiculação de anúncios publicitários. O AdMob pode processar identificadores de dispositivo e dados de interação para exibir anúncios relevantes.
+          </li>
+          <li>
+            <strong>Google Analytics for Firebase:</strong> Utilizado para compreender a estabilidade e desempenho do aplicativo através de métricas agregadas e impessoais.
+          </li>
+          <li>
+            <strong>Redes de Mediação de Publicidade (Unity Ads / IronSource):</strong> Podem ser acionadas via mediação oficial do AdMob para fornecimento de inventário publicitário. Nossos registros de vendedores autorizados encontram-se publicados em nosso arquivo <a href="app-ads.txt" target="_blank">app-ads.txt</a>.
+          </li>
+        </ul>
 
-      <h2>6. Alterações nesta Política</h2>
-      <p>
-        A <strong>HeartAttack Games</strong> pode atualizar esta Política de Privacidade periodicamente para refletir melhorias no jogo ou exigências legais e regulatórias. Recomendamos a consulta regular desta página para verificar eventuais atualizações.
-      </p>
+        <h2>3. Segurança dos Dados e Criptografia</h2>
+        <p>
+          Todas as transmissões de dados entre o aplicativo e os serviços em nuvem (Google Play Games, AdMob e Firebase) são realizadas através de conexões estritamente criptografadas utilizando protocolos seguros da indústria (<strong>HTTPS / TLS</strong>), impedindo a interceptação não autorizada.
+        </p>
 
-      <h2>7. Contato</h2>
-      <p>
-        Se você tiver qualquer dúvida sobre esta Política de Privacidade ou sobre as práticas de proteção de dados do estúdio, entre em contato com a equipe de desenvolvimento da <strong>HeartAttack Games</strong> através da nossa página oficial ou pelos canais de suporte cadastrados na Google Play Store.
-      </p>
+        <h2>4. Privacidade de Crianças (COPPA e LGPD)</h2>
+        <p>
+          O <strong>Simon Genius</strong> é um jogo casual de desafio de memória destinado ao público geral. O aplicativo não coleta intencionalmente informações de identificação pessoal de crianças. Quando veiculados anúncios para usuários classificados em faixas etárias protegidas, os sistemas operam em conformidade com o <em>Children's Online Privacy Protection Act (COPPA)</em> e com as diretrizes para famílias da Google Play Store, desativando a personalização comportamental de anúncios.
+        </p>
+
+        <h2>5. Retenção e Exclusão de Dados</h2>
+        <p>
+          Como o jogo não armazena contas proprietárias nem dados cadastrais em servidores próprios, a gestão dos dados obedece às ferramentas do próprio sistema Android:
+        </p>
+        <ul>
+          <li>
+            <strong>Exclusão/Redefinição do ID de Publicidade:</strong> Você pode a qualquer momento redefinir ou excluir seu Advertising ID acessando as <em>Configurações do Android &gt; Google &gt; Anúncios</em>.
+          </li>
+          <li>
+            <strong>Dados do Google Play Games:</strong> O usuário pode gerenciar ou excluir dados de perfil e histórico de jogos pelo aplicativo oficial <em>Google Play Games</em> em seu aparelho.
+          </li>
+          <li>
+            <strong>Exclusão Local:</strong> Desinstalar o jogo ou limpar os dados do aplicativo remove todas as preferências locais salvas no dispositivo.
+          </li>
+        </ul>
+
+        <h2>6. Contato do Estúdio</h2>
+        <p>
+          Se você tiver qualquer dúvida sobre esta Política de Privacidade ou sobre as práticas de proteção de dados, entre em contato com a equipe de desenvolvimento da <strong>HeartAttack Games</strong> através da nossa página oficial ou pelos canais de suporte cadastrados na Google Play Store.
+        </p>
+      </div>
+
+      <!-- ENGLISH CONTENT (EN) -->
+      <div class="content-en">
+        <h1>Privacy Policy</h1>
+        <div class="last-updated">Application: <strong>Simon Genius - Memory Game</strong> (Android) &bull; Last updated: <strong>September 26, 2026</strong></div>
+
+        <p>
+          This Privacy Policy outlines how <strong>HeartAttack Games</strong> ("Studio", "we", "our") handles user information in relation to the mobile application <strong>Simon Genius - Memory Game</strong> ("App", "Game"). We are committed to protecting user privacy and ensuring full compliance with Google Play Store Developer Policies, GDPR, and LGPD.
+        </p>
+
+        <div class="highlight-box">
+          <strong>Privacy Summary:</strong> <em>Simon Genius</em> <strong>DOES NOT</strong> collect or request personally identifiable information (PII) such as full names, physical addresses, personal email addresses, phone numbers, or government IDs. We do not sell user data.
+        </div>
+
+        <h2>1. Information Collected and Purposes</h2>
+        <p>
+          To enable gameplay mechanics, cloud leaderboard synchronization, and support free access through secure advertising, the following technical data may be processed:
+        </p>
+        <ul>
+          <li>
+            <strong>Device Identifiers & Advertising ID:</strong> Google Advertising ID (AAID) and technical installation identifiers, used for ad delivery, fraud prevention, frequency capping, and analytics by Google AdMob and its mediation partners.
+          </li>
+          <li>
+            <strong>App Activity & Gameplay Data:</strong> High scores, unlocked achievements, session durations, and general progress events processed anonymously via Google Analytics for Firebase and Google Play Games to optimize performance and game balance.
+          </li>
+          <li>
+            <strong>Technical Diagnostics & Performance:</strong> Device model, Android OS version, crash logs, and ANR (Application Not Responding) metrics used exclusively for debugging and technical stability improvements.
+          </li>
+        </ul>
+
+        <h2>2. Third-Party Services Integrated</h2>
+        <p>
+          The application incorporates trusted industry-standard SDKs that operate under their own privacy practices and security standards:
+        </p>
+        <ul>
+          <li>
+            <strong>Google Play Games Services:</strong> Used for global leaderboard rankings and cloud achievement progress tied to your Google Play account. See the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
+          </li>
+          <li>
+            <strong>Google AdMob:</strong> Serves in-game advertisements. AdMob may process device identifiers and ad interaction data to provide compliant, relevant advertising.
+          </li>
+          <li>
+            <strong>Google Analytics for Firebase:</strong> Provides aggregate, non-personal metrics regarding app stability and engagement.
+          </li>
+          <li>
+            <strong>Ad Mediation Partners (Unity Ads / IronSource):</strong> May be requested via AdMob mediation to provide ad inventory. Our verified publisher records are published in our <a href="app-ads.txt" target="_blank">app-ads.txt</a> file.
+          </li>
+        </ul>
+
+        <h2>3. Data Security & Encryption</h2>
+        <p>
+          All data transmitted between the application and third-party cloud endpoints (Google Play Games, AdMob, and Firebase) is encrypted in transit using industry-standard protocols (<strong>HTTPS / TLS</strong>), preventing unauthorized interception.
+        </p>
+
+        <h2>4. Children's Privacy (COPPA & Global Standards)</h2>
+        <p>
+          <strong>Simon Genius</strong> is a casual arcade memory game intended for general audiences. The app does not knowingly collect personal information from children. When serving ads to users classified under age protection thresholds, third-party ad networks operate in compliance with the <em>Children's Online Privacy Protection Act (COPPA)</em> and Google Play Family guidelines, disabling personalized behavioral tracking.
+        </p>
+
+        <h2>5. Data Retention & User Rights (Deletion)</h2>
+        <p>
+          Because our game does not require custom user accounts or store personal data on proprietary external servers, users can exercise complete control directly through Android:
+        </p>
+        <ul>
+          <li>
+            <strong>Reset / Delete Advertising ID:</strong> You can reset or delete your Advertising ID at any time via <em>Android Settings &gt; Google &gt; Ads</em>.
+          </li>
+          <li>
+            <strong>Google Play Games Data:</strong> Users can view, disconnect, or delete game activity history through the official <em>Google Play Games</em> app.
+          </li>
+          <li>
+            <strong>Local Storage:</strong> Uninstalling the app or clearing application cache/data instantly removes all locally stored preferences.
+          </li>
+        </ul>
+
+        <h2>6. Studio Contact</h2>
+        <p>
+          If you have any questions or inquiries regarding this Privacy Policy or data protection practices, please contact the <strong>HeartAttack Games</strong> development team through our official website or via developer support channels listed on Google Play.
+        </p>
+      </div>
+
     </div>
   </main>
 
   <footer>
-    <div>&copy; 2026 HeartAttack Games. Todos os direitos reservados.</div>
-    <div style="margin-top: 0.35rem; font-size: 0.8rem;">Simon Genius - Jogo da Memória &bull; Política de Privacidade em Conformidade com a Google Play Store.</div>
+    <div class="content-pt">
+      <div>&copy; 2026 HeartAttack Games. Todos os direitos reservados.</div>
+      <div style="margin-top: 0.35rem; font-size: 0.8rem;">Simon Genius - Jogo da Memória &bull; Política de Privacidade em Conformidade com a Google Play Store.</div>
+    </div>
+    <div class="content-en">
+      <div>&copy; 2026 HeartAttack Games. All rights reserved.</div>
+      <div style="margin-top: 0.35rem; font-size: 0.8rem;">Simon Genius - Memory Game &bull; Privacy Policy in full compliance with Google Play Store Policies.</div>
+    </div>
   </footer>
 
+  <script>
+    function setLanguage(lang) {
+      const body = document.body;
+      const ptButtons = document.querySelectorAll('.btn-lang-pt');
+      const enButtons = document.querySelectorAll('.btn-lang-en');
+
+      if (lang === 'en') {
+        body.classList.remove('lang-pt');
+        body.classList.add('lang-en');
+        ptButtons.forEach(b => b.classList.remove('active'));
+        enButtons.forEach(b => b.classList.add('active'));
+        document.documentElement.lang = 'en';
+      } else {
+        body.classList.remove('lang-en');
+        body.classList.add('lang-pt');
+        enButtons.forEach(b => b.classList.remove('active'));
+        ptButtons.forEach(b => b.classList.add('active'));
+        document.documentElement.lang = 'pt-BR';
+      }
+    }
+
+    // Auto-detect language from URL (?lang=en or #en) or browser preference
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get('lang');
+      const hash = window.location.hash.toLowerCase();
+
+      if (langParam === 'en' || hash === '#en') {
+        setLanguage('en');
+      }
+    });
+  </script>
 </body>
 </html>
